@@ -11,13 +11,14 @@
 	</parent>
 
 	<groupId>fr.eql.al35</groupId>
-	<artifactId>Mathilda</artifactId>
+	<artifactId>Comparator</artifactId>
 	<version>1.0</version>
-	<name>Mathilda</name>
-	<description>Projet 1 - AL35</description>
+	<name>Comparator</name>
+	<description>POC AL35</description>
 
 	<properties>
 		<java.version>1.8</java.version>
+		    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
 
 	<dependencies>

@@ -14,20 +14,20 @@ import org.springframework.context.event.EventListener;
 
 
 @SpringBootApplication
-public class MathildaApplication {
+public class ComparatorApplication {
 	
-	static Logger log = LoggerFactory.getLogger(MathildaApplication.class);
+	static Logger log = LoggerFactory.getLogger(ComparatorApplication.class);
 
 	public static void main(String[] args) {
-		SpringApplication.run(MathildaApplication.class, args);
+		SpringApplication.run(ComparatorApplication.class, args);
 		System.out.println("Coucou .. ça va la vie ? ");
 	}
 	
 
-	//Lorsque l'ensemble des config sont finalisée = lancement du navigateur sur l'url défini0
+	//Lorsque l'ensemble des config sont finalisées = lancement du navigateur sur l'url défini0
 	@EventListener({ApplicationReadyEvent.class})
 	static void applicationReadyEvent() {
-	    openBrowser("http://localhost:8085/home");
+	    openBrowser("http://localhost:8085/offers");
 	}
 
 	public static void openBrowser(String url) {
