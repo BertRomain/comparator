@@ -1,4 +1,4 @@
-package fr.eql.al35.comparator.entity;
+package fr.eql.al35.entity;
 
 import java.io.Serializable;
 import java.net.URL;

@@ -1,0 +1,14 @@
+<!DOCTYPE HTML>
+<html xmlns:th="https://www.thymeleaf.org">
+<head> 
+    <title>Comparez vos prix</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+	<h1>Formulaire</h1>
+    <form action="#" th:action="@{/offers}" th:object="${offer}" method="post">
+    	<p>EAN: <input type="text" th:field="*{ean}" /></p>
+        <p><input type="submit" value="Voir les offres" /> <input type="reset" value="Effacer" /></p>
+    </form>
+</body>
+</html>

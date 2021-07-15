@@ -7,7 +7,6 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import fr.eql.al35.comparator.dao.MerchantDao;
 import fr.eql.al35.comparator.dao.OfferDao;
 import fr.eql.al35.comparator.entity.Offer;
 
@@ -19,12 +18,9 @@ public class OfferService implements OfferIService {
 	@Autowired
 	private OfferDao offerDao;
 
-	@Autowired
-	private MerchantDao merchantDao;
-
 	@Override
-	public List<Offer> listOffers(Integer EAN) {
-		List<Offer> listOffers = (List<Offer>) offerDao.findById(EAN).get();
+	public List<Offer> listOffers(String EAN) {
+		List<Offer> listOffers = (List<Offer>) offerDao.findByEan(EAN);
 		return listOffers;
 	}
 

@@ -7,6 +7,6 @@ import lombok.ToString;
 
 public class OfferRequest {
 	
-	private Integer EAN;
+	private String ean;
 
 }

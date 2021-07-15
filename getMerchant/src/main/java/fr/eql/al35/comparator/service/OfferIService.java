@@ -6,6 +6,6 @@ import fr.eql.al35.comparator.entity.Offer;
 
 public interface OfferIService {
 
-	public List<Offer> listOffers(Integer EAN);
+	public List<Offer> listOffers(String EAN);
 
 }
