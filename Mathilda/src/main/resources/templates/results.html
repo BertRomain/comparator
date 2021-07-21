@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html xmlns:th="https://www.thymeleaf.org">
 <head> 
-    <title>Getting Started: Handling Form Submission</title>
+    <title>Résultats</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <style>table th, table td {padding: 5px; border: 1px solid black;}</style>
 </head>
@@ -9,14 +9,16 @@
 	<h1>th:each</h1>
 <table>
 <tr>
+<th>Marchand</th>
 <th>Prix</th>
 <th>Voir l'offre</th>
 </tr>
 <tr th:each="offer : ${offers}">
-<td th:utext="${#numbers.formatCurrency(offer.price)}">10,00 &#x20AC;</td>
-<td><img th:src="@{'/logos/' + ${offer.merchant.imageURL}}"><a th:href="${offer.url}" target="_blank"/>Voir l'offre</td>
+<td><img th:src="@{'/logos/' + ${offer.merchant.imageURL}}"></td>
+<td th:utext="${offer.price} + ' &euro;'"></td>
+<td><a th:href="${offer.url}" target="_blank">Voir l'offre</a></td>
 </tr>
 </table>
-    <a href="/offers">Comparer un autre produit</a>
+    <a href="/offers">Comparer les prix d'un autre produit</a>
 </body>
 </html>

@@ -1,7 +1,6 @@
 package fr.eql.al35.entity;
 
 import java.io.Serializable;
-import java.net.URL;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -22,7 +21,7 @@ public class Offer implements Serializable {
 	private String ean;
 	private String productName;
 	private String description;
-	private URL url;
+	private String url;
 	private Double price;
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "merchant_id")
@@ -32,11 +31,11 @@ public class Offer implements Serializable {
 		super();
 	}
 	
-	public Offer(String ean, String productName, String decription, URL url, Double price, Merchant merchant) {
+	public Offer(String ean, String productName, String description, String url, Double price, Merchant merchant) {
 		super();
 		this.ean = ean;
 		this.productName = productName;
-		this.description = decription;
+		this.description = description;
 		this.url = url;
 		this.price = price;
 		this.merchant = merchant;
@@ -68,15 +67,15 @@ public class Offer implements Serializable {
 		return description;
 	}
 
-	public void setDecription(String decription) {
-		this.description = decription;
+	public void setDecription(String description) {
+		this.description = description;
 	}
 
-	public URL getUrl() {
+	public String getUrl() {
 		return url;
 	}
 
-	public void setUrl(URL url) {
+	public void setUrl(String url) {
 		this.url = url;
 	}
 
