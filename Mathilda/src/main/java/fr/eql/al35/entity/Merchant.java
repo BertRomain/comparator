@@ -2,16 +2,18 @@ package fr.eql.al35.entity;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
 public class Merchant {
 	
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id; 
 	private String merchantName; 
 	private String imageURL;
+	
 	public Merchant() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -78,8 +80,7 @@ public class Merchant {
 	}
 	public void setImageURL(String imageURL) {
 		this.imageURL = imageURL;
-	} 
-
+	}
 	
 	
 }

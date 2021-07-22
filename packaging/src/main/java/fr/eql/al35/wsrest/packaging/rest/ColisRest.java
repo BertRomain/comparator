@@ -27,7 +27,6 @@ public class ColisRest {
 		return colisService.getColisById(idColis);
 	}
 
-	@SuppressWarnings("unused")
 	@PostMapping("/weight/") // http://localhost:8087/weight/ 
 	public ColisResponse getWeigth(@RequestBody ColisRequest colisRequest) {
 		System.out.println("méthode POST");

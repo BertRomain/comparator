@@ -13,6 +13,8 @@ import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.event.EventListener;
 
 
+
+
 @SpringBootApplication
 public class ComparatorApplication {
 	
@@ -29,7 +31,7 @@ public class ComparatorApplication {
 	static void applicationReadyEvent() {
 	    openBrowser("http://localhost:8085/offers");
 	}
-
+	
 	public static void openBrowser(String url) {
 		
 	    if(Desktop.isDesktopSupported()){

@@ -3,8 +3,10 @@ package fr.eql.al35.entity;
 import java.io.Serializable;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -16,14 +18,16 @@ public class Offer implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id; 
 	private String ean;
 	private String productName;
 	private String description;
+	
+	@Column(length = 500)
 	private String url;
 	private Double price;
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne(cascade = CascadeType.MERGE)
 	@JoinColumn(name = "merchant_id")
 	private Merchant merchant;
 	
@@ -41,10 +45,11 @@ public class Offer implements Serializable {
 		this.merchant = merchant;
 	}
 
+
 	@Override
 	public String toString() {
-		return "Product [ean=" + ean + ", productName=" + productName + ", decription=" + description + ", url=" + url
-				+ ", price=" + price + "]";
+		return "Offer [id=" + id + ", ean=" + ean + ", productName=" + productName + ", description=" + description
+				+ ", url=" + url + ", price=" + price + ", merchant=" + merchant + "]";
 	}
 
 	public String getEan() {
@@ -63,11 +68,11 @@ public class Offer implements Serializable {
 		this.productName = productName;
 	}
 
-	public String getDecription() {
+	public String getDescription() {
 		return description;
 	}
 
-	public void setDecription(String description) {
+	public void setDescription(String description) {
 		this.description = description;
 	}
 

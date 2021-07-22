@@ -9,10 +9,10 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>fr.eql.al35.wsrest</groupId>
-	<artifactId>transport</artifactId>
+	<artifactId>OfferWebService</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>transport</name>
-	<description>WS Rest : transport</description>
+	<name>OfferWebService</name>
+	<description>WS Rest : offer</description>
 	<properties>
 		<java.version>1.8</java.version>
 	</properties>
