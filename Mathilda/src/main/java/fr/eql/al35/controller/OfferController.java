@@ -32,7 +32,7 @@ public class OfferController {
 	
 	  @GetMapping("/offers")
 	  public String eanForm(Offer offer, Model model) {	
-			List<Offer> listOffers = offerService.findByEan();
+			List<Offer> listOffers = offerService.findByEan(offer);
 			model.addAttribute("offers", listOffers);
 			model.addAttribute("merchant", merchantService.findAll());
 			return "offers";

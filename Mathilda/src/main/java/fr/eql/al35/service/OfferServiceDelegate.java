@@ -48,9 +48,23 @@ public class OfferServiceDelegate implements OfferIService{
 		return Arrays.asList(tabOffers);
 	}
 
+
 	@Override
-	public List<Offer> findByEan() {
+	public Offer existByEan(Offer offer) {
+		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public Offer findByEanAndMerchant(Offer offer) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void mergeOffer(Offer offer) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

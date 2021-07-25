@@ -1,6 +1,7 @@
 package fr.eql.al35.entity;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -30,11 +31,30 @@ public class Offer implements Serializable {
 	@ManyToOne(cascade = CascadeType.MERGE)
 	@JoinColumn(name = "merchant_id")
 	private Merchant merchant;
+
+	private LocalDate createDate;
+	private LocalDate modifyDate;
 	
+		
 	public Offer() {
 		super();
+		// TODO Auto-generated constructor stub
 	}
-	
+
+
+	public Offer(String ean, String productName, String description, String url, Double price, Merchant merchant,
+			LocalDate modifyDate) {
+		super();
+		this.ean = ean;
+		this.productName = productName;
+		this.description = description;
+		this.url = url;
+		this.price = price;
+		this.merchant = merchant;
+		this.modifyDate = modifyDate;
+	}
+
+
 	public Offer(String ean, String productName, String description, String url, Double price, Merchant merchant) {
 		super();
 		this.ean = ean;
@@ -95,6 +115,36 @@ public class Offer implements Serializable {
 	public Merchant getMerchant() {
 		return merchant;
 	}
+
+	public Integer getId() {
+		return id;
+	}
+
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+
+	public LocalDate getCreateDate() {
+		return createDate;
+	}
+
+
+	public void setCreateDate(LocalDate createDate) {
+		this.createDate = createDate;
+	}
+
+
+	public LocalDate getModifyDate() {
+		return modifyDate;
+	}
+
+
+	public void setModifyDate(LocalDate modifyDate) {
+		this.modifyDate = modifyDate;
+	}
+
 
 	public void setMerchant(Merchant merchant) {
 		this.merchant = merchant;

@@ -6,6 +6,7 @@ import org.springframework.stereotype.Repository;
 import fr.eql.al35.entity.Offer;
 
 @Repository
-public interface OfferIRepository extends CrudRepository<Offer, Integer> {
-
+public interface OfferRepository extends CrudRepository<Offer, Integer> {
+	
+	
 }

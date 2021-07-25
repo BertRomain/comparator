@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import fr.eql.al35.entity.Merchant;
 import fr.eql.al35.entity.Offer;
-import fr.eql.al35.repository.OfferIRepository;
+import fr.eql.al35.repository.OfferRepository;
 
 //Java SQL imports
 
@@ -17,7 +17,7 @@ public class transformer {
 	//	private TransformerIService transformerService; 
 
 	@Autowired
-	private OfferIRepository offerRepository; 
+	private OfferRepository offerRepository; 
 
 	//	@RequestMapping("/transformer")
 	//    public String getYourPage(Model model) {

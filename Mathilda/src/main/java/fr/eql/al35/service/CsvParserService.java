@@ -13,18 +13,23 @@ import org.springframework.stereotype.Service;
 
 import fr.eql.al35.entity.Merchant;
 import fr.eql.al35.entity.Offer;
-import fr.eql.al35.repository.OfferIRepository;
+import fr.eql.al35.repository.OfferRepository;
 
 @Service
 public class CsvParserService {
 
 	@Autowired
-	private OfferIRepository offerRepository;
+	private OfferRepository offerRepository;
+
+	@Autowired
+	private OfferService offerService;
 
 	static Merchant merchant = new Merchant(); 
 	static Offer offer = new Offer();
-	static int accepted = 0; 
+	static int created = 0; 
 	static int rejected = 0; 
+	static int updated = 0; 
+	
 	public String TYPE = "text/csv";
 	public void csvToOffer(InputStream is) {
 
@@ -37,7 +42,7 @@ public class CsvParserService {
 						.withTrim()
 						.withIgnoreEmptyLines()
 						.withQuote(null));) //pour les quotes insérées par erreur dans les ligne 
-			{
+		{
 			
 			Iterable<CSVRecord> csvRecords = csvParser.getRecords();
 			for (CSVRecord csvRecord : csvRecords) {
@@ -46,13 +51,16 @@ public class CsvParserService {
 					rejected ++;
 					continue;
 
-				} else if (csvRecord.size() < 12) { //TODO Magic number //on ignore les lignes mal formatées
+					//TODO Magic number
+				} else if (csvRecord.size() < 12) {  //on ignore les lignes mal formatées
 					rejected ++;
 					continue;
+
 				} else if (csvRecord.get("prix").matches(".*[a-z].*")) { //on ignore les lignes dont les contenus génèrent des erreurs de type (double/string)
 					rejected ++;
 					continue;
 				}
+				
 				merchant.setId(6);
 				Offer offer = new Offer(
 						csvRecord.get("codebarre"),
@@ -61,11 +69,17 @@ public class CsvParserService {
 						csvRecord.get("urlficheproduit"),
 						Double.parseDouble(csvRecord.get("prix")),
 						merchant);
-				offerRepository.save(offer);
-				accepted++;
+				if (offerService.existByEan(offer) != null) {
+					offerService.mergeOffer(offer);
+					updated++;
+				} else 
+					offer.setCreateDate(java.time.LocalDate.now());
+					offerRepository.save(offer);
+					created++;
 				System.out.println("Traitement de la ligne " + csvRecord.getRecordNumber());
 			}
-			System.out.println("Nombre de lignes insérées dans la base de données : " + accepted);
+			System.out.println("Nombre de lignes insérées dans la base de données : " + created);
+			System.out.println("Nombre de lignes mise à jour dans la base de données : " + updated);
 			System.out.println("Nombre de lignes rejetées : " + rejected);
 		} catch (IOException e) {
 			throw new RuntimeException("fail to parse CSV file: " + e.getMessage());
