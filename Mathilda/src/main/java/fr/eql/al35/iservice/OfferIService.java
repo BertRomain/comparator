@@ -2,8 +2,6 @@ package fr.eql.al35.iservice;
 
 import java.util.List;
 
-import javax.transaction.Transactional;
-
 import fr.eql.al35.entity.Offer;
 
 public interface OfferIService {
@@ -13,4 +11,5 @@ public interface OfferIService {
 	public Offer existByEan(Offer offer);
 	public Offer findByEanAndMerchant(Offer offer); 
 	public void mergeOffer (Offer offer);
+	public void insertOnDuplicateKey(Offer offer);
 }

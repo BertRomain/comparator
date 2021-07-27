@@ -6,8 +6,7 @@ import java.time.LocalDate;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -19,8 +18,7 @@ public class Offer implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer id; 
+	private String id; 
 	private String ean;
 	private String productName;
 	private String description;
@@ -28,7 +26,8 @@ public class Offer implements Serializable {
 	@Column(length = 500)
 	private String url;
 	private Double price;
-	@ManyToOne(cascade = CascadeType.MERGE)
+	
+	@ManyToOne(cascade = CascadeType.MERGE, fetch= FetchType.LAZY)
 	@JoinColumn(name = "merchant_id")
 	private Merchant merchant;
 
@@ -55,8 +54,9 @@ public class Offer implements Serializable {
 	}
 
 
-	public Offer(String ean, String productName, String description, String url, Double price, Merchant merchant) {
+	public Offer(String id, String ean, String productName, String description, String url, Double price, Merchant merchant) {
 		super();
+		this.id = id; 
 		this.ean = ean;
 		this.productName = productName;
 		this.description = description;
@@ -116,12 +116,12 @@ public class Offer implements Serializable {
 		return merchant;
 	}
 
-	public Integer getId() {
+	public String getId() {
 		return id;
 	}
 
 
-	public void setId(Integer id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 

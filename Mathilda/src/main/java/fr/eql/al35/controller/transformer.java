@@ -28,11 +28,10 @@ public class transformer {
 
 	@RequestMapping("/transformer")
 	public void createOffer() {
-		Merchant merchant = new Merchant(6, "Rakuten", "rakuten.jpg");
-		Offer offer = new Offer("123456789987", "Toto", "la description", "http://www.toto.com/", 9.99, merchant);
+		Merchant merchant = new Merchant(6, "Rakuten", "rakuten.jpg", "direct", 0.12);
+		Offer offer = new Offer("123456789987DirectRakuten","123456789987", "Toto", "la description", "http://www.toto.com/", 9.99, merchant);
 		offerRepository.save(offer);
 	}
 
 
 }	
-//http://priceminister.effiliation.com/output/commun/effiliation_COMPUTER_storage_NEW.csv 

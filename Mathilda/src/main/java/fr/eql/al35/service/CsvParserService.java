@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
+
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;
@@ -13,18 +14,19 @@ import org.springframework.stereotype.Service;
 
 import fr.eql.al35.entity.Merchant;
 import fr.eql.al35.entity.Offer;
-import fr.eql.al35.repository.OfferRepository;
+import fr.eql.al35.repository.MerchantIRepository;
 
 @Service
 public class CsvParserService {
 
-	@Autowired
-	private OfferRepository offerRepository;
 
 	@Autowired
 	private OfferService offerService;
 
-	static Merchant merchant = new Merchant(); 
+	@Autowired
+	private MerchantIRepository merchantIRepository;
+	
+	static Merchant merchant; 
 	static Offer offer = new Offer();
 	static int created = 0; 
 	static int rejected = 0; 
@@ -61,20 +63,16 @@ public class CsvParserService {
 					continue;
 				}
 				
-				merchant.setId(6);
+				merchant = merchantIRepository.findById(6).get();
 				Offer offer = new Offer(
+						csvRecord.get("codebarre") + merchant.getSource() + merchant.getMerchantName(),
 						csvRecord.get("codebarre"),
 						csvRecord.get("nomproduit"),
 						csvRecord.get("theme"),
 						csvRecord.get("urlficheproduit"),
 						Double.parseDouble(csvRecord.get("prix")),
 						merchant);
-				if (offerService.existByEan(offer) != null) {
-					offerService.mergeOffer(offer);
-					updated++;
-				} else 
-					offer.setCreateDate(java.time.LocalDate.now());
-					offerRepository.save(offer);
+					offerService.insertOnDuplicateKey(offer);
 					created++;
 				System.out.println("Traitement de la ligne " + csvRecord.getRecordNumber());
 			}

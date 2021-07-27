@@ -48,24 +48,13 @@ public class OfferService implements OfferIService{
 	query.setParameter("parammerchant", offer.getMerchant());
 	Offer retrievedOffer = (Offer) query.getSingleResult();
 	LocalDate localDate = LocalDate.now();
-	if (offer.getProductName() != retrievedOffer.getProductName()) {
-		retrievedOffer.setProductName(offer.getProductName());
-		retrievedOffer.setModifyDate(localDate);
-	}
-	if (offer.getUrl() != retrievedOffer.getUrl()) {
-		retrievedOffer.setUrl(offer.getUrl());
-		retrievedOffer.setModifyDate(localDate);
-	}
-	if (offer.getPrice() != retrievedOffer.getPrice()) {
-		retrievedOffer.setPrice(offer.getPrice());
-		retrievedOffer.setModifyDate(localDate);
-	}
-	if (offer.getDescription() != retrievedOffer.getDescription()) {
-		retrievedOffer.setDescription(offer.getDescription());
-		retrievedOffer.setModifyDate(localDate);
-	}
+	retrievedOffer.setPrice(offer.getPrice());
+	retrievedOffer.setDescription(offer.getDescription());
+	retrievedOffer.setProductName(offer.getProductName());
+	retrievedOffer.setUrl(offer.getUrl());
+	retrievedOffer.setModifyDate(localDate);
 	em.merge(retrievedOffer);
-		}
+	}
 
 
 	@Override
@@ -79,6 +68,30 @@ public class OfferService implements OfferIService{
 		} catch (NoResultException nre) {
 		}
 		return null;
+	}
+
+
+	@Override
+	public void insertOnDuplicateKey(Offer offer) {
+		Query query = em.createNativeQuery(
+"INSERT INTO offer (id, ean, product_name, description, url, price, create_date, modify_date) VALUES (?1, ?2, ?3, ?4, ?5, ?6, ?7, NULL) " +
+		        "ON DUPLICATE KEY UPDATE " +
+		            "product_name = ?3, " +
+		            "description = ?4, " +
+		            "url = ?5, " +
+		            "price = ?6, " +
+		            "modify_date = ?7 ;"
+		            );
+		query.setParameter(1, offer.getId());
+		query.setParameter(2, offer.getEan());
+		query.setParameter(3, offer.getProductName());
+		query.setParameter(4, offer.getDescription());
+		query.setParameter(5, offer.getUrl());
+		query.setParameter(6, offer.getPrice());
+		query.setParameter(7, java.time.LocalDate.now());
+		System.out.println("la query " + query.toString());
+		query.executeUpdate();
+			
 	}
 
 }

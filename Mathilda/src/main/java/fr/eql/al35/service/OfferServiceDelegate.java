@@ -67,4 +67,10 @@ public class OfferServiceDelegate implements OfferIService{
 		
 	}
 
+	@Override
+	public void insertOnDuplicateKey(Offer offer) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }
