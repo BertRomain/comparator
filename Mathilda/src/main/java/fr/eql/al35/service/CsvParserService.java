@@ -30,7 +30,6 @@ public class CsvParserService {
 	static Offer offer = new Offer();
 	static int created = 0; 
 	static int rejected = 0; 
-	static int updated = 0; 
 	
 	public String TYPE = "text/csv";
 	public void csvToOffer(InputStream is) {
@@ -77,7 +76,6 @@ public class CsvParserService {
 				System.out.println("Traitement de la ligne " + csvRecord.getRecordNumber());
 			}
 			System.out.println("Nombre de lignes insérées dans la base de données : " + created);
-			System.out.println("Nombre de lignes mise à jour dans la base de données : " + updated);
 			System.out.println("Nombre de lignes rejetées : " + rejected);
 		} catch (IOException e) {
 			throw new RuntimeException("fail to parse CSV file: " + e.getMessage());
