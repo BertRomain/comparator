@@ -1,4 +1,4 @@
-package fr.eql.al35.service;
+package fr.eql.al35.parser;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -15,9 +15,10 @@ import org.springframework.stereotype.Service;
 import fr.eql.al35.entity.Merchant;
 import fr.eql.al35.entity.Offer;
 import fr.eql.al35.repository.MerchantIRepository;
+import fr.eql.al35.service.OfferService;
 
 @Service
-public class CsvParserService {
+public class RakutenParser {
 
 
 	@Autowired
