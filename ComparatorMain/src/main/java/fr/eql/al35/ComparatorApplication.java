@@ -18,7 +18,7 @@ import org.springframework.context.event.EventListener;
 @SpringBootApplication
 public class ComparatorApplication {
 	
-	static Logger log = LoggerFactory.getLogger(ComparatorApplication.class);
+	final static Logger log = LoggerFactory.getLogger(ComparatorApplication.class);
 
 	public static void main(String[] args) {
 		SpringApplication.run(ComparatorApplication.class, args);
@@ -26,16 +26,16 @@ public class ComparatorApplication {
 	}
 	
 
-	//Lorsque l'ensemble des config sont finalisées = lancement du navigateur sur l'url défini0
+	//Lorsque l'ensemble des config sont finalisées = lancement du navigateur sur l'url défini
 	@EventListener({ApplicationReadyEvent.class})
 	static void applicationReadyEvent() {
 	    openBrowser("http://localhost:8085/offers");
 	}
 	
-	public static void openBrowser(String url) {
+	public static void openBrowser(final String url) {
 		
 	    if(Desktop.isDesktopSupported()){
-	        Desktop desktop = Desktop.getDesktop();
+	        final Desktop desktop = Desktop.getDesktop();
 	        try {
 	            desktop.browse(new URI(url));
 	        } catch (IOException | URISyntaxException e) {

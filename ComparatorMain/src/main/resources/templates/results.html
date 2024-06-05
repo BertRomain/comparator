@@ -1,24 +1,47 @@
 <!DOCTYPE HTML>
-<html xmlns:th="https://www.thymeleaf.org">
-<head> 
-    <title>Résultats</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <style>table th, table td {padding: 5px; border: 1px solid black;}</style>
+<html xmlns:th="https://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout}">
+<head>
+<title>Résultats</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<style>
+table th, table td {
+	padding: 5px;
+	border: 1px solid black;
+	margin-left: auto;
+  	margin-right: auto;
+}
+
+table {
+	margin-left:auto; 
+    margin-right:auto; 
+}
+
+#container {
+	text-align: center;
+	margin-bottom: 15px;
+	width:600px;
+}
+</style>
 </head>
 <body>
-	<h1>th:each</h1>
-<table>
-<tr>
-<th>Marchand</th>
-<th>Prix</th>
-<th>Voir l'offre</th>
-</tr>
-<tr th:each="offer : ${offers}">
-<td><img th:src="@{'/logos/' + ${offer.merchant.imageURL}}"></td>
-<td th:utext="${offer.price} + ' &euro;'"></td>
-<td><a th:href="${offer.url}" target="_blank">Voir l'offre</a></td>
-</tr>
-</table>
-    <a href="/offers">Comparer les prix d'un autre produit</a>
+	<div layout:fragment="content" id="container">
+	<h1>Résultats pour <span th:text="${offer.ean}"></span></h1>
+	<table>
+		<tr>
+			<th>Marchand</th>
+			<th>Prix</th>
+			<th>Voir l'offre</th>
+		</tr>
+		<tr th:each="offer : ${offers}">
+			<td><img th:src="@{'/logos/' + ${offer.merchant.imageURL}}"></td>
+			<td th:utext="${offer.price} + ' &euro;'"></td>
+			<td><a th:href="${offer.url}" target="_blank">Voir l'offre</a></td>
+		</tr>
+	</table>
+	<a style="margin-bottom:15px  " href="/offers">Chercher pour un autre produit</a>
+	</div>
+	
 </body>
 </html>

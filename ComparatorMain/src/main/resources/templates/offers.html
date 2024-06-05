@@ -7,18 +7,19 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body>
-<div layout:fragment="content" id="container">
-	<form action="#" th:action="@{/offers}" th:object="${offer}"
-		method="post">
-		<p>
-			Entrez un code barre: <input type="text" th:field="*{ean}" />
-		</p>
-		<p>
-			<input type="submit" value="Voir les offres" />	
+	<div layout:fragment="content" id="container">
+		<form action="#" th:action="@{/offers}" th:object="${offer}"
+			method="post">
+			<p>
+				Entrez un code barre: <input type="text" th:field="*{ean}" />
 			</p>
-			<p><input type="reset"	value="Effacer" />
-		</p>
-	</form>
+			<p>
+				<input type="submit" value="Voir les offres" />
+			</p>
+			<p>
+				<input type="reset" value="Effacer" />
+			</p>
+		</form>
 	</div>
-	</body>
+</body>
 </html>

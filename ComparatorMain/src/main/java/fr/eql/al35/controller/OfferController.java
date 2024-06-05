@@ -1,6 +1,7 @@
 package fr.eql.al35.controller;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,13 +40,12 @@ public class OfferController {
 	  }
 
 	  @PostMapping("/offers")
-	  public String offerSubmit(@ModelAttribute Offer offer, Model model) {
-		Offer offr= new Offer(); 
-		offr.setEan("3760033021812");
-		listOffer = offerServiceDelegate.findByEan(offr);
+	  public String getListById(@ModelAttribute Offer offer, Model model) {
+		listOffer = offerServiceDelegate.findByEan(offer);
+		Collections.sort(listOffer, 
+                (o1, o2) -> o1.getPrice().compareTo(o2.getPrice()));
 		model.addAttribute("offers", listOffer);
 		model.addAttribute("merchant", merchantService.findAll());
-	    System.out.println("fin du postmapping");
 	    return "results";
 	  }
 }

@@ -25,7 +25,9 @@ public class OfferController {
 	@PostMapping("/ean/") //localhost:8088/api/ean/
 	public List<Offer> getOffer(@RequestBody OfferRequest offerRequest) {
 		Offer offer = new Offer();
+		System.out.println("beanUtils");
 		BeanUtils.copyProperties(offerRequest, offer);
+		System.out.println("avant return de la liste");
 		return offerService.listOffers(offer.getEan()); 
 	}
 }

@@ -11,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+
 @Entity(name = "offer")
 public class Offer implements Serializable {
 
@@ -21,6 +22,7 @@ public class Offer implements Serializable {
 	private String id; 
 	private String ean;
 	private String productName;
+	@Column(length = 15000)
 	private String description;
 	
 	@Column(length = 500)

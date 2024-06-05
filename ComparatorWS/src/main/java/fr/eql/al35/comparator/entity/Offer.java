@@ -1,11 +1,13 @@
 package fr.eql.al35.comparator.entity;
 
 import java.io.Serializable;
-import java.net.URL;
+import java.time.LocalDate;
+import java.util.Objects;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -17,35 +19,87 @@ public class Offer implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue
-	private Integer id; 
+	private String id; 
 	private String ean;
 	private String productName;
+	@Column(length = 15000)
 	private String description;
-	private URL url;
+	
+	@Column(length = 500)
+	private String url;
 	private Double price;
-	@ManyToOne(cascade = CascadeType.ALL)
+	
+	@ManyToOne(cascade = CascadeType.MERGE, fetch= FetchType.LAZY)
 	@JoinColumn(name = "merchant_id")
 	private Merchant merchant;
+
+	private LocalDate createDate;
+	private LocalDate modifyDate;
 	
 	public Offer() {
 		super();
 	}
+
+	public Offer(String id, String ean, String productName, String description, String url, Double price,
+			Merchant merchant, LocalDate createDate, LocalDate modifyDate) {
+		super();
+		this.id = id;
+		this.ean = ean;
+		this.productName = productName;
+		this.description = description;
+		this.url = url;
+		this.price = price;
+		this.merchant = merchant;
+		this.createDate = createDate;
+		this.modifyDate = modifyDate;
+	}
 	
-	public Offer(String ean, String productName, String decription, URL url, Double price, Merchant merchant) {
+	
+
+	public Offer(String ean, String productName, String description, String url, Double price, Merchant merchant) {
 		super();
 		this.ean = ean;
 		this.productName = productName;
-		this.description = decription;
+		this.description = description;
 		this.url = url;
 		this.price = price;
 		this.merchant = merchant;
 	}
 
 	@Override
+	public int hashCode() {
+		return Objects.hash(createDate, description, ean, id, merchant, modifyDate, price, productName, url);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Offer other = (Offer) obj;
+		return Objects.equals(createDate, other.createDate) && Objects.equals(description, other.description)
+				&& Objects.equals(ean, other.ean) && Objects.equals(id, other.id)
+				&& Objects.equals(merchant, other.merchant) && Objects.equals(modifyDate, other.modifyDate)
+				&& Objects.equals(price, other.price) && Objects.equals(productName, other.productName)
+				&& Objects.equals(url, other.url);
+	}
+
+	@Override
 	public String toString() {
-		return "Product [ean=" + ean + ", productName=" + productName + ", decription=" + description + ", url=" + url
-				+ ", price=" + price + "]";
+		return "Offer [id=" + id + ", ean=" + ean + ", productName=" + productName + ", description=" + description
+				+ ", url=" + url + ", price=" + price + ", merchant=" + merchant + ", createDate=" + createDate
+				+ ", modifyDate=" + modifyDate + "]";
+	}
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
 	}
 
 	public String getEan() {
@@ -64,19 +118,19 @@ public class Offer implements Serializable {
 		this.productName = productName;
 	}
 
-	public String getDecription() {
+	public String getDescription() {
 		return description;
 	}
 
-	public void setDecription(String decription) {
-		this.description = decription;
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
-	public URL getUrl() {
+	public String getUrl() {
 		return url;
 	}
 
-	public void setUrl(URL url) {
+	public void setUrl(String url) {
 		this.url = url;
 	}
 
@@ -96,59 +150,21 @@ public class Offer implements Serializable {
 		this.merchant = merchant;
 	}
 
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((description == null) ? 0 : description.hashCode());
-		result = prime * result + ((ean == null) ? 0 : ean.hashCode());
-		result = prime * result + ((price == null) ? 0 : price.hashCode());
-		result = prime * result + ((productName == null) ? 0 : productName.hashCode());
-		result = prime * result + ((url == null) ? 0 : url.hashCode());
-		return result;
+	public LocalDate getCreateDate() {
+		return createDate;
 	}
 
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Offer other = (Offer) obj;
-		if (description == null) {
-			if (other.description != null)
-				return false;
-		} else if (!description.equals(other.description))
-			return false;
-		if (ean == null) {
-			if (other.ean != null)
-				return false;
-		} else if (!ean.equals(other.ean))
-			return false;
-		if (price == null) {
-			if (other.price != null)
-				return false;
-		} else if (!price.equals(other.price))
-			return false;
-		if (productName == null) {
-			if (other.productName != null)
-				return false;
-		} else if (!productName.equals(other.productName))
-			return false;
-		if (url == null) {
-			if (other.url != null)
-				return false;
-		} else if (!url.equals(other.url))
-			return false;
-		return true;
+	public void setCreateDate(LocalDate createDate) {
+		this.createDate = createDate;
 	}
 
+	public LocalDate getModifyDate() {
+		return modifyDate;
+	}
+
+	public void setModifyDate(LocalDate modifyDate) {
+		this.modifyDate = modifyDate;
+	}
 	
-
-
-
-
-
+	
 }
