@@ -8,8 +8,8 @@
 */*.jar
 */*.war
 */*.ear
-*.*.gzip
-*.*.csv
+*/*.gzip
+*/*.csv
 
 */node_modules
 **/node_modules
